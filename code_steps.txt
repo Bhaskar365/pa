@@ -1,0 +1,71 @@
+~$ jupyter notebook
+
+import pandas as pd
+df = pd.read_csv('data/survey_results_public.csv')
+df.shape
+//(89184, 84)
+df.info()
+pd.set_option('display.max_columns', 84)
+pd.set_option('display.max_rows',84)
+schema_df = pd.read_csv('data/survey_results_schema.csv')
+schema_df = pd.read_csv('data/survey_results_schema.csv')
+schema_df // returns the list of columns and its question text associated with it
+df.head() // returns whatever content is in the public csv file , if parameter is set to something
+             like df.head(10) first 10 rows are displayed 
+df.head(10)
+df.tail(10)// returns whatever content is in the public csv file , if parameter is set to something
+             like df.tail(10) last 10 rows are displayed 
+
+dataframes is just like a python object
+
+people = {
+    'email':'['a','b','c']
+}
+
+people['email']
+
+//datafrmaes are the same as dictionary but with much more functionalities
+
+import pandas as pd
+df = pd.DataFrames(people)
+df
+
+    first   last    email
+0   ...     ....     a          // 0 1 2 indexes
+1   ...     ....     b          // first , last -> column if declared like email
+2   ...     ....     c
+
+df['email']  // email column of data frame , not actually a key like in dictionary
+0   a
+1   b
+2   c
+Name: email, dtype: object      // series representation of emails inspite
+                                // of dictionary output that comes out as list like []
+
+type(df['email'])           //pandas.core.series.Series   Series object
+
+// df['email']  === df.email
+
+//to access more than one column in dataframe , then
+
+df[['last','email']]
+    
+    last    email
+0   ....    a
+1   ....    b
+2   ....    c
+// when multiple rows are selected, it is no longer a Series as Series is only 1 row 
+// returning multiple columns is just another data frame
+
+// to select all the available columns
+
+df.columns
+['..','..','..'], dtype='object'
+
+// to select columns square bracket notation or dot notation like df['..'] or df.x
+
+//for selection of rows , iloc or loc is available
+
+df.iloc[0] , 
+
+
