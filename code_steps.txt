@@ -66,6 +66,171 @@ df.columns
 
 //for selection of rows , iloc or loc is available
 
-df.iloc[0] , 
+df.iloc[0] // first row selection , iloc -> location by index
+
+first   last    email 
+....    ....    .....
+Name:0, dtype: object
+
+df.iloc[[0,1]]    // select first 2 rows of data
+
+    first   last    email
+0   .....   ....      a
+1   .....   ....      b
+
+df.iloc[[0,1],2]   // select column 2 and then pass row 0,1
+
+//use loc by index
+
+df.loc[0]  // gives data of first row
+
+df.loc[[0,1]]  // selects first 2 rows 
+
+df.loc[[0,1],'email'] // select row 0 , 1 after selecting email column
+
+// select specific columns and rows using loc
+
+df.loc[[0,1],['col1','col2']]       // select columns and rows using loc
+
+df.shape     // total rows and column
+
+df['column']        // select columns
+
+df['columnName'].value_counts()      // to get the count of rows of selected column of types of
+                                     // entries
+
+df.loc[index]   // get details of the row of the column
+
+df.loc[index,'columnName']      // get details of the column of the given index
+
+df.loc[[1,2,3],'columnName']        // get column details of the given rows including last entry
+
+//slicing using pandas
+df.loc[0:2, 'columnName']    // select from 0 to 2 and select rows of the selected columnName
+
+//select a range of column using slicing
+df.loc[0:2,'column1':'column2']  
+
+<!---------------- INDEXES, set, reset, use ---------------------------->
+
+ordinary dataframe
+    first   last    email
+0     -      -        -
+1     -      -        -
+2     -      -        -
+
+//to set a column as index
+df.set_index('email')
+
+email    first   last
+-@.com     -      -
+-@.com     -      -
+-@.com     -      -
+
+//however on df we still get the same table
+    first   last    email
+0     -      -        -
+1     -      -        -
+2     -      -        -
+//did not change
+
+To permanently change the df index column,
+df.set_index('email', inplace=True)
+
+//To get the details of the index column
+
+df.index
+Index(['chi.cago@test', 'j.doe@test', 'j.wick@test'], dtype='object', name='email')
+
+//df.loc[0] searches for index values, however , since the index integer column was changed
+//to email , there is a type error now
+
+//df.iloc[0] gives the values as iloc searches by integer however
+
+//To reset the index back to the original dataframe command available -
+
+line_1 - df.reset_index(inplace=True)
+line_2 - df
+
+// if schema_df requires a column to be selected and a particular value
+schema_df.loc['S7'] //selects  s7 row details
+
+schema_df.loc['s7','question'] // selects question from S7
+
+//sort queries alphabetically
+schema_df.sort_index()
+
+//sort queries in descending order
+schema_df.sort_index(ascending=False)
+
+//to put queries permanently sorted
+schema_df.sort_index(inplace=True)
+
+//pandas filter queries
+//some variable = df['column_name'] == 'some_parameterName'
+x = (df['last'] == 'wick')
+df[x]       //displays all the details with matching last column name
+
+//filter queries with loc
+df.loc[x]
+//shows all details with last name wick
+
+//df.loc[x,'email']
+//only details email appears
+
+//and or operator with filter
+//and
+x = (df['last'] == 'Wick') & (df['first'] == 'john')
+
+//or
+x = (df['last'] == 'Wick') | (df['first'] == 'john')
+
+//to get something that is opposite of that is here at x like everything that is not wick and john
+df.loc[~x,'email'] 
+
+//filtering based on criteria
+high = (df['ConvertedCompYearly']>50000)        // gives salary above 50000
+
+df.loc[high]        //list of all with high condition True
+
+//to get with specific columns
+df.loc[high,['parameter1','parameter2','parameter3']]
+
+//if there is a list of element or strings that needs to be filtered from 
+// use of isin() to check the list
+
+countries = ['United States', 'India', 'United Kingdom', 'Germany', 'Canada']
+filt = df['country'].isin(countries)
+
+df.loc[filt,'Country']
+ResponseId
+41.0        Canada
+42.0       Germany
+46.0        Canada
+47.0         India
+48.0         India
+            ... 
+
+//check something if exists
+
+LanguagesWorkedWith - 
+ResponseId
+1.0                                                      NaN
+2.0                               HTML/CSS;JavaScript;Python
+3.0                               Bash/Shell (all shells);Go
+4.0        Bash/Shell (all shells);HTML/CSS;JavaScript;PH...
+6.0        Bash/Shell (all shells);HTML/CSS;JavaScript;Ru...
+
+//if python required to be checked
+
+filt = df['LanguageHaveWorkedWith'].str.contains('Python', na=False)  //na for NaN values else error throw
+
+df.loc[filt,['Age','',...]]     //for details and whatever columns required
+
+
+
+
+
+
 
 
